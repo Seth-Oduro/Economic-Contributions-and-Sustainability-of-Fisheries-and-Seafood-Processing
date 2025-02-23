@@ -126,7 +126,7 @@ The study also does not account for external factors such as global market fluct
 This study provides a comprehensive assessment of the economic contributions of fisheries and seafood processing in British Columbia, offering valuable insights for policymakers and industry stakeholders. The findings confirm that Seafood Processing is the dominant driver of revenue, GDP, and employment, whereas Wild Fisheries remain subject to regulatory and environmental pressures. Recreational Fishing, though smaller in direct contributions, plays a critical role in tourism and local economies.
 The observed decline in economic contributions between 2010-2015 and 2015-2019 highlight the need for policy-driven solutions to enhance sustainability, labour market stability, and economic resilience. Investments in value-added processing, sustainable fisheries management, and infrastructure development for recreational fishing could help maximize long-term benefits. Ultimately, ensuring a balanced approach between economic growth and resource conservation is essential for the sustainability of British Columbia’s ocean-based industries.
 
-## References
+# References
 Teh, L. C. L., Cheung, W. W. L., & Sumaila, R. (2022). Assessing the economic contribution of ocean-based activities using the Pacific Coast of British Columbia as a case study. Sustainability, 14(14), 8662. https://doi.org/10.3390/su14148662
 
 Allison, E. H., & Bassett, H. R. (2015). Climate change in the oceans: Human impacts and responses. Science, 350(6262), 778-782. https://doi.org/10.1126/science.aac8721
@@ -162,7 +162,675 @@ Voyer, M., Quirk, G., McIlgorm, A., & Azmi, K. (2018). Shades of blue: What do c
 Worm, B., Barbier, E. B., Beaumont, N., Duffy, J. E., Folke, C., Halpern, B. S., ... & Watson, R. (2006). Impacts of biodiversity loss on ocean ecosystem services. Science, 314(5800), 787-790. https://doi.org/10.1126/science.1132294
 
 
+# APPENDIX
 
 
+
+[Uploading Assignment 2.R…]()## ----setup, include=FALSE----------------------------------------------------------------------------------------------------------------
+knitr::opts_chunk$set(echo = TRUE)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Load necessary libraries
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(tidyr)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Load the dataset (Update the file path accordingly)
+file_path <- "C:/Users/seodu/OneDrive/Desktop/MFRE/Semester 2/FRE 523/Assignment/Assignment 2/data.csv"
+df <- read_csv(file_path)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+df
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Check all the variable names
+variable_names <- names(df)
+print(variable_names)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Filter for Recreational Fish Catch and sum the values
+recreational_catch <- df %>%
+  filter(fishing_sector == "Recreational") 
+
+# Print result
+print(recreational_catch)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+
+# Extract total recreational fish catch for 2019
+total_recreational_catch <- df %>%
+  filter(fishing_sector == "Recreational", year == 2019) %>%
+  group_by(common_name) %>%  
+  summarise(catch_tonnes = sum(tonnes, na.rm = TRUE))  
+
+# Display results
+print("Total Recreational Fish Catch for 2019:")
+print(total_recreational_catch)
+
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Display total recreational fish catch
+print("Total Recreational Fish Catch by Species (Tonnes):")
+print(total_recreational_catch)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Length-weight conversion factors (from FishBase)
+length_weight_factors <- data.frame(
+  common_name = c("Chinook salmon", "Sockeye salmon", "Coho salmon"), # Data from Sea Around Us Database
+  avg_weight_kg = c(70, 7.7, 15.2)  
+)
+
+print(length_weight_factors)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Merge catch data with length-weight conversion data
+catch_weighted <- total_recreational_catch %>%
+  inner_join(length_weight_factors, by = "common_name") %>%
+  mutate(weighted_tonnes = catch_tonnes * avg_weight_kg / 1000)
+
+print(catch_weighted)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Compute weighted average weight per fish
+total_catch_tonnes <- sum(catch_weighted$weighted_tonnes)
+
+print(total_catch_tonnes)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+catch_weighted <- catch_weighted %>%
+  mutate(weight_proportion = weighted_tonnes / total_catch_tonnes)
+
+print(catch_weighted)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+weighted_avg_weight <- sum(catch_weighted$weight_proportion * catch_weighted$avg_weight_kg)
+
+print(weighted_avg_weight)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# angler expenditure per tonne (from DFO survey)
+angler_expenditure_per_tonne <- 661954000 # (Angler exp: 2006)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Compute total revenue
+total_revenue <- total_catch_tonnes * angler_expenditure_per_tonne
+
+print(total_revenue)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Display final results
+print(paste("Total Recreational Fish Catch (Tonnes):", round(total_catch_tonnes, 2)))
+print(paste("Weighted Average Fish Weight (kg):", round(weighted_avg_weight, 2)))
+print(paste("Total Recreational Fishing Revenue ($):", round(total_revenue, 2)))
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Step 1: Calculate Total Recreational Fishing Revenue Over Time
+  recreational_fishing_revenue_yearly <- df %>%
+    filter(fishing_sector == "Recreational") %>%  
+    group_by(year) %>%
+    summarise(
+      total_catch_tonnes = sum(tonnes, na.rm = TRUE)
+    )
+
+  # Step 2: Define Angler Expenditure Per Tonne (Replace with actual value if available)
+  angler_expenditure_per_tonne <- 661954000
+
+  # Step 3: Compute Total Revenue for Recreational Fishing
+  recreational_fishing_revenue_yearly <- recreational_fishing_revenue_yearly %>%
+    mutate(total_revenue = total_catch_tonnes * angler_expenditure_per_tonne)
+
+# Step 4: Plot Line Graph for Recreational Fishing Revenue Over the Years
+  ggplot(recreational_fishing_revenue_yearly, aes(x = year, y = total_revenue)) +
+    geom_line(color = "blue", size = 1) +  
+    geom_point(color = "red", size = 2) +  
+    labs(title = "Recreational Fishing Revenue Over Time",
+         x = "Year",
+         y = "Total Recreational Fishing Revenue ($)") +
+    theme_minimal()
+  
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+
+# Calculate total revenue for wild fisheries in 2019
+wild_fisheries_revenue <- df %>%
+  filter((fishing_sector == "Industrial" | fishing_sector == "Artisanal") & year == 2019) %>%  
+  group_by(common_name) %>%  
+  summarise(
+    total_catch_tonnes = sum(tonnes, na.rm = TRUE), 
+    avg_ex_vessel_price = mean(landed_value, na.rm = TRUE)  
+  ) %>%
+  mutate(total_revenue = total_catch_tonnes * avg_ex_vessel_price)  
+
+# Display results
+print("Total Revenue for Wild Fisheries (2019):")
+print(wild_fisheries_revenue)
+
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Display results
+print("Total Revenue for Wild Fisheries by Species:")
+print(wild_fisheries_revenue)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Compute overall revenue for all wild fisheries
+total_wild_fisheries_revenue <- sum(wild_fisheries_revenue$total_revenue, na.rm = TRUE)
+
+print(paste("Total Wild Fisheries Revenue ($) 2019:", round(total_wild_fisheries_revenue, 2)))
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Calculate wild fishery revenue and total catch over time
+  wild_fisheries_data <- df %>%
+    filter(fishing_sector == "Industrial" | fishing_sector == "Artisanal") %>%  
+    group_by(year) %>%
+    summarise(
+      total_catch_tonnes = sum(tonnes, na.rm = TRUE),  
+      avg_ex_vessel_price = mean(landed_value, na.rm = TRUE)
+    ) %>%
+    mutate(total_revenue = total_catch_tonnes * avg_ex_vessel_price)
+
+print(wild_fisheries_data)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+ # Calculate wild fishery revenue over time
+  wild_fisheries_revenue_yearly <- df %>%
+    filter(fishing_sector == "Industrial" | fishing_sector == "Artisanal") %>%  
+    group_by(year) %>%
+    summarise(
+      total_catch_tonnes = sum(tonnes, na.rm = TRUE),  
+      avg_ex_vessel_price = mean(landed_value, na.rm = TRUE)  
+    ) %>%
+    mutate(total_revenue = total_catch_tonnes * avg_ex_vessel_price)  
+  
+  # Plot line graph for Wild Fishery Revenue over years
+  ggplot(wild_fisheries_revenue_yearly, aes(x = year, y = total_revenue)) +
+    geom_line(color = "blue", size = 1) +  
+    geom_point(color = "red", size = 2) +  
+    labs(title = "Wild Fishery Revenue Over Time",
+         x = "Year",
+         y = "Total Revenue ($)") +
+    theme_minimal()
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Load necessary libraries
+library(dplyr)
+
+# Processing margin data for 2014-2016
+processing_margin_data <- data.frame(
+  year = c(2014, 2015, 2016),
+  wholesale_value = c(1433.9, 1395.9, 1721.2),  
+  landed_value = c(862.2, 891.8, 1169.6)  
+)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Calculate processing margin percentage for each year
+processing_margin_data <- processing_margin_data %>%
+  mutate(margin_percentage = ((wholesale_value - landed_value) / landed_value) * 100)
+
+print(processing_margin_data)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Compute average processing margin across 2014-2016
+average_processing_margin <- mean(processing_margin_data$margin_percentage, na.rm = TRUE)
+
+print(average_processing_margin)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Calculate Seafood Processing Revenue
+seafood_processing_revenue <- wild_fisheries_revenue %>%
+  mutate(
+    processing_margin_value = total_revenue * (average_processing_margin / 100),
+    total_processing_revenue = total_revenue + processing_margin_value
+  )
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Display Seafood Processing Revenue
+print("Total Revenue for Seafood Processing and Packaging by Species:")
+print(seafood_processing_revenue)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Compute total seafood processing revenue
+total_seafood_processing_revenue <- sum(seafood_processing_revenue$total_processing_revenue, na.rm = TRUE)
+
+print(paste("Total Seafood Processing Revenue 2019 ($):", round(total_seafood_processing_revenue, 2)))
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Step 3: Calculate Seafood Processing Revenue Over the Years
+  seafood_processing_revenue_yearly <- wild_fisheries_revenue_yearly %>%
+    mutate(
+      processing_margin_value = total_revenue * (average_processing_margin / 100),
+      total_processing_revenue = total_revenue + processing_margin_value
+    )
+
+  # Step 4: Plot Line Graph for Seafood Processing Revenue Over the Years
+  ggplot(seafood_processing_revenue_yearly, aes(x = year, y = total_processing_revenue)) +
+    geom_line(color = "blue", size = 1) +  
+    geom_point(color = "red", size = 2) +  
+    labs(title = "Seafood Processing Revenue Over Time",
+         x = "Year",
+         y = "Total Seafood Processing Revenue ($)") +
+    theme_minimal()
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Create a dataframe with the three revenue values
+revenue_data <- data.frame(
+  category = c("Recreational Fishing", "Wild Fisheries", "Seafood Processing"),
+  revenue = c(total_revenue, total_wild_fisheries_revenue, total_seafood_processing_revenue)
+)
+
+print(revenue_data)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Compute percentage labels
+revenue_data <- revenue_data %>%
+  mutate(percentage = (revenue / sum(revenue)) * 100,
+         label = paste0(category, "\n", round(percentage, 1), "%"))
+
+print(revenue_data)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Create pie chart
+ggplot(revenue_data, aes(x = "", y = revenue, fill = category)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y") +
+  geom_text(aes(label = label), position = position_stack(vjust = 0.5), size = 5) +
+  labs(title = "Comparison of Fishing Industry Revenue Sources - 2019",
+       x = NULL, y = NULL) +
+  theme_void() +  
+  theme(legend.title = element_blank())  
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Load necessary libraries
+library(dplyr)
+library(readr)
+
+# Define Input-Output Multipliers From Statistics Canada 2019
+input_output_multipliers <- data.frame(
+  sector = c("Wild Fisheries", "Recreational Fishing", "Seafood Processing"),  
+  direct_multiplier = c(0.607, 0.50, 0.227),
+  indirect_multiplier = c(0.205, 0.50, 0.466),
+  induced_multiplier = c(0.150, 0.33, 0.198)
+)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Use the total revenue values calculated earlier
+total_revenue_data <- data.frame(
+  sector = c("Wild Fisheries", "Recreational Fishing", "Seafood Processing"),  
+  total_revenue = c(total_wild_fisheries_revenue, total_revenue, total_seafood_processing_revenue)  
+)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Merge revenue data with multipliers
+gdp_multiplier_data <- total_revenue_data %>%
+  left_join(input_output_multipliers, by = "sector") %>%
+  mutate(
+    direct_gdp = total_revenue * direct_multiplier,  
+    indirect_gdp = total_revenue * indirect_multiplier,  
+    induced_gdp = total_revenue * induced_multiplier,  
+    total_gdp = direct_gdp + indirect_gdp + induced_gdp  
+  )
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Display results
+print("GDP Contribution Using Input-Output Multipliers:")
+print(gdp_multiplier_data)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Compute total GDP contribution across all sectors
+total_gdp_direct <- sum(gdp_multiplier_data$direct_gdp, na.rm = TRUE)
+total_gdp_indirect <- sum(gdp_multiplier_data$indirect_gdp, na.rm = TRUE)
+total_gdp_induced <- sum(gdp_multiplier_data$induced_gdp, na.rm = TRUE)
+total_gdp_overall <- sum(gdp_multiplier_data$total_gdp, na.rm = TRUE)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+print(paste("Total Direct GDP Contribution (2019): $", round(total_gdp_direct, 2)))
+print(paste("Total Indirect GDP Contribution (2019): $", round(total_gdp_indirect, 2)))
+print(paste("Total Induced GDP Contribution(2019): $", round(total_gdp_induced, 2)))
+print(paste("Total Overall GDP Contribution(2019): $", round(total_gdp_overall, 2)))
+
+
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Prepare data for visualization
+gdp_pie_data <- gdp_multiplier_data %>%
+  select(sector, total_gdp) %>%
+  mutate(
+    percentage = (total_gdp / sum(total_gdp)) * 100,  
+    label = paste0(sector, "\n", round(percentage, 1), "%")  
+  )
+
+# Plot Pie Chart
+ggplot(gdp_pie_data, aes(x = "", y = total_gdp, fill = sector)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y") +  # Convert bar chart to pie chart
+  geom_text(aes(label = label), position = position_stack(vjust = 0.5), size = 5) +
+  labs(title = "GDP Contribution by Sector - 2019 (Using Input-Output Multipliers)",
+       x = NULL, y = NULL) +
+  theme_void() +  # Remove axis labels
+  theme(legend.title = element_blank())
+
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Load necessary libraries
+library(dplyr)
+library(readr)
+
+# Define Labour Income & Employment Multipliers: Statistics Canada - 2019 (Direct , Indirect and Induced Multiplier)
+labour_multipliers <- data.frame(
+  sector = c("Wild Fisheries", "Recreational Fishing", "Seafood Processing"),
+  labour_income_multiplier = c(0.384, 0.38, 0.463),
+  employment_multiplier = c(6.465, 16.31 , 8.278)  # Employment (FTE Jobs per $1M Revenue)
+)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Use the total revenue values calculated earlier
+total_revenue_data <- data.frame(
+  sector = c("Wild Fisheries", "Recreational Fishing", "Seafood Processing"),
+  total_revenue = c(total_wild_fisheries_revenue, total_revenue, total_seafood_processing_revenue)  
+)
+
+# Merge revenue data with labour multipliers
+labour_data <- total_revenue_data %>%
+  left_join(labour_multipliers, by = "sector") %>%
+  mutate(
+    labour_income = total_revenue * labour_income_multiplier,  
+    employment_fte = (total_revenue / 1000000) * employment_multiplier  
+  )
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Display results
+print("Labour Income & Employment (FTE) Using Input-Output Multipliers:")
+print(labour_data)
+
+# Compute total Labour Income & Employment across all sectors
+total_labour_income <- sum(labour_data$labour_income, na.rm = TRUE)
+total_employment_fte <- sum(labour_data$employment_fte, na.rm = TRUE)
+
+print(paste("Total Labour Income (2019): $", round(total_labour_income, 2)))
+print(paste("Total Employment (2019) (FTE Jobs):", round(total_employment_fte, 2)))
+
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Compute percentage for each sector
+labour_pie_data <- labour_data %>%
+  mutate(labour_income_percentage = (labour_income / sum(labour_income)) * 100,
+         employment_percentage = (employment_fte / sum(employment_fte)) * 100)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+labour_pie_data
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Create data for Labour Income Pie Chart
+labour_income_pie <- labour_pie_data %>%
+  select(sector, labour_income, labour_income_percentage) %>%
+  mutate(label = paste0(sector, "\n", round(labour_income_percentage, 1), "%"))
+
+# Create data for Employment Pie Chart
+employment_pie <- labour_pie_data %>%
+  select(sector, employment_fte, employment_percentage) %>%
+  mutate(label = paste0(sector, "\n", round(employment_percentage, 1), "%"))
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Plot Pie Chart for Labour Income
+labour_income_plot <- ggplot(labour_income_pie, aes(x = "", y = labour_income, fill = sector)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y") +
+  geom_text(aes(label = label), position = position_stack(vjust = 0.5), size = 5) +
+  labs(title = "Labour Income Contribution by Sector - 2019",
+       x = NULL, y = NULL) +
+  theme_void()
+
+# Plot Pie Chart for Employment (FTE Jobs)
+employment_plot <- ggplot(employment_pie, aes(x = "", y = employment_fte, fill = sector)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y") +
+  geom_text(aes(label = label), position = position_stack(vjust = 0.5), size = 5) +
+  labs(title = "Employment (FTE Jobs) Contribution by Sector - 2019",
+       x = NULL, y = NULL) +
+  theme_void()
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Display Pie Charts
+print(labour_income_plot)
+print(employment_plot)
+
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Load the dataset (Update the file path accordingly)
+file_path <- "C:/Users/seodu/OneDrive/Desktop/MFRE/Semester 2/FRE 523/Assignment/Assignment 2/data/data3.csv"
+df1 <- read_csv(file_path)
+
+df1
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+df1 <- df1 %>% rename(Year = REF_DATE)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Convert Year column to Date format for consistency
+df1 <- df1 %>% mutate(Year = as.Date(paste0(Year, "-01-01")))
+
+df1
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Drop the specified variables
+df1_cleaned <- df1 %>% select(-GEO, -DGUID, -SCALAR_ID, -VECTOR, -COORDINATE, -STATUS, -SYMBOL, -TERMINATED, -UOM_ID, -SCALAR_FACTOR, -DECIMALS, -UOM)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+df1_cleaned
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# There was no data for recreational fishing or tourism multiplier so I used the one I got from the supplement document for the publication as a baseline for all the years
+
+rec_ind <- data.frame(
+  Year = 2015,
+  Industry = "Recreational Fishing",
+  Variable = rep(c("Output", "Gross domestic product (GDP) at market prices", "Labour income", "Jobs"), each = 3),
+  Multiplier_type = rep(c("Direct multiplier", "Indirect multiplier", "Induced multiplier"), times = 4),
+  VALUE = c(1, 0.50, 0.38, 16.31, 1.52, 0.50, 0.46, 21.50, 1.30, 0.33, 0.27, 19.13) 
+)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Use 2015 Recreational Fishing data for all years (2005-2020)
+rec_data <- do.call(rbind, lapply(2010:2020, function(y) {
+  rec_ind %>% mutate(Year = y)
+}))
+
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Convert Year column to Date format for consistency
+rec_data <- rec_data %>% mutate(Year = as.Date(paste0(Year, "-01-01")))
+rec_data
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Standardize Multiplier Type column naming
+df1_cleaned <- df1_cleaned %>% rename(Multiplier_type = `Multiplier type`)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Combine extracted data with new Recreational Fishing data using Year, Industry, Variable, and Multiplier_Type
+final_data <- bind_rows(df1_cleaned, rec_data) %>%
+  arrange(Year, Industry, Variable, Multiplier_type)
+
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+final_data
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Rename specific values in the 'Category' column
+final_data <- final_data %>% 
+  mutate(Industry = ifelse(Industry == "Fishing, hunting and trapping [BS114000]", "Wild Fishery",
+                  ifelse(Industry == "Seafood product preparation and packaging [BS311700]", "Seafood Processing", Industry)))
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+final_data
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Define total revenue for each sector
+total_revenue_stack <- data.frame(
+  Industry = c("Wild Fishery", "Recreational Fishing", "Seafood Processing"),
+  Revenue = c(total_revenue, total_wild_fisheries_revenue, total_seafood_processing_revenue)
+)
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+total_revenue_stack
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Merge total revenue data with multipliers
+final_data_adj <- final_data %>%
+  left_join(total_revenue_stack, by = "Industry") %>%
+  mutate(Adjusted_Value = VALUE * Revenue)
+
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+final_data_adj
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Convert Year column to integer for consistency
+ final_data_adj <- final_data_adj %>% mutate(Year = as.integer(format(as.Date(Year, "%Y-%m-%d"), "%Y")))
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+final_data_adj
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Aggregate data into two periods: 2010-2015 and 2015-2019
+divide <- final_data_adj %>%
+  filter(Year >= 2010 & Year <= 2019) %>%  
+  mutate(Period = ifelse(Year <= 2015, "2010-2015", "2015-2019"))
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+divide
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Summarize data by Variable and Multiplier_Type for stacked bar chart
+data_summarized <- divide %>%
+  group_by(Period, Variable, Multiplier_type) %>%
+  summarise(Total_Impact = sum(Adjusted_Value, na.rm = TRUE)) %>%
+  ungroup()
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+data_summarized
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Convert data to long format for plotting
+data_summarized_long <- data_summarized %>%
+  pivot_wider(names_from = Multiplier_type, values_from = Total_Impact) %>%
+  pivot_longer(cols = c("Direct multiplier", "Indirect multiplier", "Induced multiplier"), names_to = "Impact_Type", values_to = "value") %>%
+  mutate(
+    type = case_when(
+      Variable == "Output" ~ "Revenue ($ millions)",
+      Variable == "Gross domestic product (GDP) at market prices" ~ "GDP ($ millions)",
+      Variable == "Labour income" ~ "Wages ($ millions)",
+      Variable == "Jobs" ~ "# of Jobs (000)"
+    )
+  )
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+data_summarized_long
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Function to create individual stacked bar charts
+plot_stacked_bar <- function(data, title, y_label) {
+  ggplot(data, aes(x = factor(Period), y = value / 1e6, fill = Impact_Type)) +  # Convert to millions
+    geom_bar(stat = "identity", position = "stack", width = 0.6) +
+    labs(title = title,
+         x = "Period",
+         y = y_label,
+         fill = "Impact Type") +
+    scale_fill_manual(values = c("Direct multiplier" = "#1f77b4", "Indirect multiplier" = "#ff7f0e", "Induced multiplier" = "#2ca02c")) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Create individual plots
+revenue_plot <- plot_stacked_bar(data_summarized_long %>% filter(type == "Revenue ($ millions)"), "Revenue", "Revenue ($ millions)")
+gdp_plot <- plot_stacked_bar(data_summarized_long %>% filter(type == "GDP ($ millions)"), "GDP", "GDP ($ millions)")
+labour_income_plot <- plot_stacked_bar(data_summarized_long %>% filter(type == "Wages ($ millions)"), "Labour Income", "Wages ($ millions)")
+jobs_plot <- plot_stacked_bar(data_summarized_long %>% filter(type == "# of Jobs (000)"), "Employment", "# of Jobs (000)")
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# Display plots
+print(revenue_plot)
+print(gdp_plot)
+print(labour_income_plot)
+print(jobs_plot)
 
 
