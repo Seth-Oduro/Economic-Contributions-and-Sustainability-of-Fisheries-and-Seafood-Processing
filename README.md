@@ -21,11 +21,9 @@ In British Columbia, the ocean supports key industries, including fisheries, aqu
 
 
 ### Research Questions
-    •	To analyze the economic contributions of Wild Fisheries, Recreational Fishing, and Seafood Processing in British Columbia from 2005 to 2020 in terms of revenue, GDP, employment, and labour income.
-  
-    •	To assess the direct, indirect, and induced economic impacts of these industries using input-output multipliers and historical data.
-  
-    •	To compare economic contributions over two periods (2010-2015 and 2015-2019) to understand industry evolution and resilience.
+    To analyze the economic contributions of Wild Fisheries, Recreational Fishing, and Seafood Processing in British Columbia from 2005 to 2020 in terms of revenue, GDP, employment, and labour income.
+    To assess the direct, indirect, and induced economic impacts of these industries using input-output multipliers and historical data.
+    To compare economic contributions over two periods (2010-2015 and 2015-2019) to understand industry evolution and resilience.
 
 ## Literature Review
 
@@ -54,16 +52,16 @@ The data for this study were obtained from multiple sources:
 ### Data Extraction and Processing
 Selection of Industries and Variables
 
-    •	Wild Fisheries: Measured as capture fisheries from industrial and artisanal sources, measured using landed value and total catch.
-    •	Recreational Fishing: Includes both resident and non-resident participation, measured through expenditure per angler and total catch.
-    •	Seafood Processing: Refers to the post-harvest sector, estimated using wholesale value and processing margins to derive economic contributions.
+    Wild Fisheries: Measured as capture fisheries from industrial and artisanal sources, measured using landed value and total catch.
+    Recreational Fishing: Includes both resident and non-resident participation, measured through expenditure per angler and total catch.
+    Seafood Processing: Refers to the post-harvest sector, estimated using wholesale value and processing margins to derive economic contributions.
     
 The following economic indicators were selected:
 
-    •	Output (Total Revenue)
-    •	Gross Domestic Product (GDP) at Market Prices
-    •	Labour Income (Wages and Salaries)
-    •	Jobs (Full-time Equivalent Employment)
+    Output (Total Revenue)
+    Gross Domestic Product (GDP) at Market Prices
+    Labour Income (Wages and Salaries)
+    Jobs (Full-time Equivalent Employment)
 
 ### Methodological Approach
 #### Input-Output Economic Modeling
