@@ -86,5 +86,83 @@ The following economic indicators were selected:
 Note: Since recreational fishing expenditure data was available only for 2015, these values were extrapolated across all years (2010-2020) to maintain consistency in the analysis.
 
 
-![000010](https://github.com/user-attachments/assets/f4fc29a8-a6ea-406c-8706-7335a879f905)
+## Results and Analysis
+
+![000010](https://github.com/user-attachments/assets/f4fc29a8-a6ea-406c-8706-7335a879f905) 
+![image](https://github.com/user-attachments/assets/c8930096-d61e-44a4-a29f-d2d0fc372e80)   
+![image](https://github.com/user-attachments/assets/f549f104-6fc4-4d36-b7b7-2223bc405196)
+
+The revenue trends over time for Recreational Fishing, Wild Fishery, and Seafood Processing reveal distinct patterns in economic contributions and growth. Seafood Processing exhibits the highest revenue, surpassing $3 trillion by 2020, showing consistent growth post-1990, likely due to technological advancements, increased export demand, and higher value-added activities. In contrast, Recreational Fishing revenue has steadily increased without major fluctuations, reaching nearly $1.5 trillion by 2020, indicating strong industry resilience, driven by stable participation and tourism growth. Wild Fisheries, however, exhibit significant fluctuations, with revenue rising post-1980 but showing periodic downturns, suggesting the impact of regulatory measures, and environmental constraints.
+A comparative analysis highlights that while Seafood Processing dominates total economic output, Recreational Fishing provides stability, and Wild Fisheries are more sensitive to policy and environmental factors. Seafood Processing consistently outperforms the other sectors in revenue, reinforcing its role as a key economic driver. However, Recreational Fishing maintains steady growth, likely due to less direct regulatory intervention and stable consumer demand. The volatility in Wild Fisheries revenue contrasts with the steady upward trends in the other two sectors, emphasizing the sector’s dependency on external factors such as quotas, sustainability policies, and climate change effects.
+
+### Analysis of Fishing Industry Revenue Sources
+
+![image](https://github.com/user-attachments/assets/dfbe2734-8107-418c-9450-dec4afd52483)
+![image](https://github.com/user-attachments/assets/cbfea50d-8e5a-4823-96ea-ab6c4ca807e4)
+![image](https://github.com/user-attachments/assets/dbf5d006-3e2e-4a53-80b0-cd7aabaed8b8)
+![image](https://github.com/user-attachments/assets/32705d4d-cef1-4c54-8a1b-f045f15c5a4f)
+
+In GDP contributions, Seafood Processing leads with 45.6% ($398.8 billion), emphasizing global trade linkages and higher economic multipliers. Wild Fisheries contribute 31.4% ($274.5 billion) as a primary seafood source, though with lower value-added potential. Recreational Fishing accounts for 23% ($201 billion), highlighting its indirect economic impact on tourism and retail. These findings suggest that Seafood Processing drives the highest economic value, while Wild Fisheries and Recreational Fishing maintain essential roles despite revenue limitations.
+The labour income and employment trends provide further insights into sectoral differences. Seafood Processing leads in labour income (55.3% or $207.08 billion) and employment (46.2% or 3.7 million jobs), emphasizing its labour-intensive nature and wage-generating potential. Wild Fisheries contributed 29.3% ($109.63 billion) to labour income but employed only 23% of workers, reflecting higher average wages in capital-intensive operations. Recreational Fishing had the lowest labour income share (15.4% or $57.46 billion) but employed more workers (30.8%) than Wild Fisheries, suggesting that it supports a large number of lower-wage, seasonal, or part-time jobs. The analysis highlights Seafood Processing as the dominant economic driver, while Wild Fisheries and Recreational Fishing contribute significantly to employment and regional economic stability.
+
+### Comparative Assessment of Economic Contributions (2010-2015 vs. 2015-2019)
+
+<img width="391" alt="000028" src="https://github.com/user-attachments/assets/c4e2e1bc-decc-42d2-8dc2-01d393841efe" />
+<img width="391" alt="00002a" src="https://github.com/user-attachments/assets/260fad52-617c-4506-9641-765ff723cd58" />
+<img width="391" alt="00002c" src="https://github.com/user-attachments/assets/84af32a5-97da-4c69-814f-02b2bed02952" />
+<img width="391" alt="00002e" src="https://github.com/user-attachments/assets/80c42657-8f30-4a9c-b85d-dae65cd0dc4a" />
+
+The employment chart shows a noticeable drop in job creation, particularly in induced effects, which suggests fewer indirect jobs supported by industry spending. This decline may be due to automation, industry consolidation, or shifting labour demands in seafood processing and fisheries. The revenue decline mirrors the trends in GDP and labour income, reinforcing the notion that the industry has contracted over time. Despite the decline, the proportionate distribution of direct, indirect, and induced effects remained stable, highlighting that while total contributions have fallen, the economic structure of the industry has remained unchanged. These findings emphasize the need for policy interventions to enhance industry resilience, improve workforce stability, and support sustainable fisheries management to maintain long-term economic viability.
+
+## Discussions
+The economic analysis of Wild Fisheries, Recreational Fishing, and Seafood Processing in British Columbia reveals significant insights into the contributions and challenges of these industries. The findings indicate that Seafood Processing dominates total revenue (50.6%) and GDP (45.6%), highlighting its role as the most economically impactful sector due to value-added processing and global trade linkages. Wild Fisheries, contributing 32.3% of total revenue and 31.4% of GDP, demonstrate moderate economic strength but remain vulnerable to quota regulations, stock availability, and environmental policies. Recreational Fishing, though the smallest in revenue (17.1%), holds a relatively high GDP share (23%), emphasizing its importance to the tourism and service industries.
+Labour income and employment trends show disparities in workforce engagement across the three sectors. Seafood Processing accounts for the highest labour income (55.3%) and employment (46.2%), reflecting its labour-intensive nature and role in job creation. Recreational Fishing employs a larger workforce (30.8%) than Wild Fisheries (23%) but at lower wages, as the industry relies more on seasonal and part-time employment. The findings also show a decline in GDP, labour income, and employment between 2010-2015 and 2015-2019, suggesting the effects of automation, industry consolidation, and shifting market dynamics. Despite these declines, the overall structure of economic contributions remains stable, reinforcing the need for strategic policy interventions to sustain industry growth and workforce stability.
+
+## Limitations
+This study has several limitations that should be considered when interpreting the findings. Data gaps and extrapolation issues exist, particularly with Recreational Fishing, where only 2015 data were available, requiring extrapolation across the study period. This introduces potential inaccuracies in trend analysis. Additionally, the use of fixed input-output multipliers from Statistics Canada assumes constant economic relationships over time, which may not fully capture technological advancements, policy changes, or efficiency improvements in the industry.
+The study also does not account for external factors such as global market fluctuations, trade policies, or environmental disruptions, which could significantly impact the fisheries and seafood processing sectors. The sectoral scope is limited to Wild Fisheries, Recreational Fishing, and Seafood Processing, excluding other important ocean-related industries such as marine shipping, offshore oil and gas, and aquaculture that contribute to the broader economy. Furthermore, the employment analysis does not differentiate between full-time, part-time, and seasonal jobs, potentially leading to overestimations or underestimations of workforce stability.
+
+## Conclusion
+This study provides a comprehensive assessment of the economic contributions of fisheries and seafood processing in British Columbia, offering valuable insights for policymakers and industry stakeholders. The findings confirm that Seafood Processing is the dominant driver of revenue, GDP, and employment, whereas Wild Fisheries remain subject to regulatory and environmental pressures. Recreational Fishing, though smaller in direct contributions, plays a critical role in tourism and local economies.
+The observed decline in economic contributions between 2010-2015 and 2015-2019 highlight the need for policy-driven solutions to enhance sustainability, labour market stability, and economic resilience. Investments in value-added processing, sustainable fisheries management, and infrastructure development for recreational fishing could help maximize long-term benefits. Ultimately, ensuring a balanced approach between economic growth and resource conservation is essential for the sustainability of British Columbia’s ocean-based industries.
+
+## References
+Teh, L. C. L., Cheung, W. W. L., & Sumaila, R. (2022). Assessing the economic contribution of ocean-based activities using the Pacific Coast of British Columbia as a case study. Sustainability, 14(14), 8662. https://doi.org/10.3390/su14148662
+
+Allison, E. H., & Bassett, H. R. (2015). Climate change in the oceans: Human impacts and responses. Science, 350(6262), 778-782. https://doi.org/10.1126/science.aac8721
+
+Colgan, C. S. (2017a). The Blue Economy: Theory and Strategy. Middlebury Institute of International Studies at Monterey.
+
+Colgan, C. S. (2017b). Measurement of the ocean economy from national income accounts to the sustainable blue economy. Journal of Ocean and Coastal Economics, 2(2), 1-43. https://doi.org/10.15351/2373-8456.1061
+
+Costanza, R., d'Arge, R., de Groot, R., Farber, S., Grasso, M., Hannon, B., ... & van den Belt, M. (1997). The value of the world's ecosystem services and natural capital. Nature, 387(6630), 253-260. https://doi.org/10.1038/387253a0
+
+Ebarvia, M. C. M. (2016). Economic assessment of oceans for sustainable blue economy development. Journal of Ocean and Coastal Economics, 2(2), 1-29. https://doi.org/10.15351/2373-8456.1051
+
+Golden, J. S., Virdin, J., Nowacek, D., Halpin, P., Bennear, L., & Patil, P. G. (2017). Making sure the blue economy is green. Nature Ecology & Evolution, 1(17), 1-3. https://doi.org/10.1038/s41559-016-0017
+
+Hoegh-Guldberg, O. (2015). Reviving the ocean economy: The case for action – 2015. WWF International.
+
+Kildow, J. T., & McIlgorm, A. (2010). The importance of estimating the contribution of the oceans to national economies. Marine Policy, 34(3), 367-374. https://doi.org/10.1016/j.marpol.2009.08.006
+
+Nunes, P. A. L. D., & van den Bergh, J. C. J. M. (2001). Economic valuation of biodiversity: Sense or nonsense? Ecological Economics, 39(2), 203-222. https://doi.org/10.1016/S0921-8009(01)00233-6
+
+OECD. (2016). The Ocean Economy in 2030. OECD Publishing. https://doi.org/10.1787/9789264251724-en
+
+Patil, P. G., Virdin, J., Colgan, C. S., Hussain, M. G., Failler, P., & Veigh, T. (2019). Initial measures of the economic activity linked to Bangladesh’s ocean space, and implications for the country’s blue economy policy objectives. Journal of Ocean and Coastal Economics, 6(2), 1-19. https://doi.org/10.15351/2373-8456.1119
+
+Pascual, U., Muradian, R., Brander, L., Gómez-Baggethun, E., Martín-López, B., Verma, M., ... & Christie, M. (2010). The economics of valuing ecosystem services and biodiversity. In The Economics of Ecosystems and Biodiversity: Ecological and Economic Foundations (pp. 183-256). Earthscan.
+
+Remoundou, K., Koundouri, P., Kontogianni, A., Nunes, P. A. L. D., & Skourtos, M. (2009). Valuation of natural marine ecosystems: An economic perspective. Environmental Science & Policy, 12(7), 1040-1051. https://doi.org/10.1016/j.envsci.2009.08.005
+
+UN General Assembly. (2015). Transforming our world: The 2030 Agenda for Sustainable Development. A/RES/70/1. https://www.un.org/ga/search/view_doc.asp?symbol=A/RES/70/1&Lang=E
+
+Voyer, M., Quirk, G., McIlgorm, A., & Azmi, K. (2018). Shades of blue: What do competing interpretations of the Blue Economy mean for oceans governance? Journal of Environmental Policy & Planning, 20(5), 595-616. https://doi.org/10.1080/1523908X.2018.1473153
+
+Worm, B., Barbier, E. B., Beaumont, N., Duffy, J. E., Folke, C., Halpern, B. S., ... & Watson, R. (2006). Impacts of biodiversity loss on ocean ecosystem services. Science, 314(5800), 787-790. https://doi.org/10.1126/science.1132294
+
+
+
+
+
 
