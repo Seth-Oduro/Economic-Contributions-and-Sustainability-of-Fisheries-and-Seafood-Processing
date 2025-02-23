@@ -6,7 +6,7 @@ This study examines the economic contributions of Wild Fisheries, Recreational F
 Labour income and employment trends highlight sectoral differences in workforce engagement. Seafood Processing led with 55.3% ($207.08 billion) of total labour income, followed by Wild Fisheries at 29.3% ($109.63 billion) and Recreational Fishing at 15.4% ($57.46 billion). Employment declined between 2010-2015 and 2015-2019, with Seafood Processing employing 46.2% of total jobs (3.7 million FTEs), Recreational Fishing 30.8% (2.46 million FTEs), and Wild Fisheries 23% (1.85 million FTEs). These findings suggest automation, industry shifts, and policy changes have influenced employment levels. The study highlights the need for policies to support sectoral resilience, employment stability, and sustainable fisheries management while optimizing economic benefits.
 
 
-Keyword: Regulatory and Environmental Policies, Ocean Economy, Recreational Fishing, Seafood Processing, Input-Output Modeling, Value-Added Processing, Blue Economy.
+Keywords: Regulatory and Environmental Policies, Ocean Economy, Recreational Fishing, Seafood Processing, Input-Output Modeling, Value-Added Processing, Blue Economy.
 
 
 ## Introduction
@@ -17,7 +17,7 @@ Despite the ocean’s economic importance, assessing its contributions remains a
 
 ### Problem Statement
 The ocean is a vital economic resource, providing livelihoods, food security, and essential ecosystem services, yet its full economic value is often underestimated or overlooked in national and regional assessments (Colgan, 2017a; Ebarvia, 2016). This underrepresentation is largely due to the complexity of quantifying both market and non-market values, as well as data limitations and methodological challenges (Teh et al., 2022; Kildow & McIlgorm, 2010). While efforts have been made to measure the economic contributions of ocean-based industries, these assessments are often sector-specific or geographically constrained, limiting their applicability in broader economic planning.
-In British Columbia, the ocean supports key industries, including fisheries, aquaculture, marine transportation, and tourism, despite the economic significance of these industries, existing research lacks an integrated approach that quantifies their total economic contributions and evaluates trends across multiple economic indicators. The absence of detailed sectoral assessments hinders policymakers and industry stakeholders from making informed decisions regarding sustainable fisheries management, value-added production strategies, and labour market policies. Without a data-driven approach, the long-term economic viability of these industries remains uncertain. This research aims to fill these knowledge gaps by analyzing historical data from 2010 to 2020, applying input-output economic modeling, and assessing trends in revenue, GDP, employment, and labour income to provide actionable insights for industry resilience and sustainability.
+In British Columbia, the ocean supports key industries, including fisheries, aquaculture, marine transportation, and tourism, despite the economic significance of these industries, existing research lacks an integrated approach that quantifies their total economic contributions and evaluates trends across multiple economic indicators. The absence of detailed sectoral assessments hinders policymakers and industry stakeholders from making informed decisions regarding sustainable fisheries management, value-added production strategies, and labour market policies. Without a data-driven approach, the long-term economic viability of these industries remains uncertain. This research aims to fill these knowledge gaps by analyzing historical data from 2010 to 2020, applying input-output economic modelling, and assessing trends in revenue, GDP, employment, and labour income to provide actionable insights for industry resilience and sustainability.
 
 
 ### Research Questions
@@ -88,7 +88,7 @@ Note: Since recreational fishing expenditure data was available only for 2015, t
 
 ## Results and Analysis
 
-![000010](https://github.com/user-attachments/assets/f4fc29a8-a6ea-406c-8706-7335a879f905) 
+![000010](https://github.com/user-attachments/assets/94f6acb4-4fc8-48f5-9317-2b690f2505d2)
 ![image](https://github.com/user-attachments/assets/c8930096-d61e-44a4-a29f-d2d0fc372e80)   
 ![image](https://github.com/user-attachments/assets/f549f104-6fc4-4d36-b7b7-2223bc405196)
 
